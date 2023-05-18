@@ -5,17 +5,15 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"github.com/dgrijalva/jwt-go"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"strings"
 
-	"github.com/dgrijalva/jwt-go"
-
-	"go.mongodb.org/mongo-driver/bson/primitive"
-	"gopkg.in/go-playground/validator.v10"
-
+	"github.com/go-playground/validator"
 	"github.com/gorilla/mux"
+	"go.mongodb.org/mongo-driver/bson/primitive"
 )
 
 type Route interface {
