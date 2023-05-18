@@ -1,0 +1,15 @@
+version: "3"
+services:
+  db:
+    image: mongo:4
+    restart: unless-stopped
+    ports:
+      - "127.0.0.1:27017:27017"
+    volumes:
+      - data-db:/dta/db
+  dummy-target-server:
+    image: ealen/echo-server
+    ports:
+      - "127.0.0.1:8090:80"
+volumes:
+  data-db:
