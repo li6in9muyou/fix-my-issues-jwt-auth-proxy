@@ -184,6 +184,24 @@ func TestProxySuccessWhitelistedSubPath(t *testing.T) {
 	checkTestResponseCode(t, http.StatusOK, res.Code)
 }
 
+func TestProxyUnauthorizedBlacklistWithoutQueryParams(t *testing.T) {
+	clearTestDB()
+	createTestUser(true)
+
+	req := newHTTPRequest("GET", "/blacklist", "", nil)
+	res := executePublicTestRequest(req)
+	checkTestResponseCode(t, http.StatusUnauthorized, res.Code)
+}
+
+func TestProxyUnauthorizedBlacklistWithQueryParams(t *testing.T) {
+	clearTestDB()
+	createTestUser(true)
+
+	req := newHTTPRequest("GET", "/blacklist?foo=bar", "", nil)
+	res := executePublicTestRequest(req)
+	checkTestResponseCode(t, http.StatusUnauthorized, res.Code)
+}
+
 type dummyProxyHandler struct {
 	Headers http.Header
 }
