@@ -162,7 +162,7 @@ func VerifyJwtMiddleware(next http.Handler) http.Handler {
 	}
 
 	var IsWhitelisted = func(r *http.Request) bool {
-		url := r.URL.RequestURI()
+		url := r.URL.EscapedPath()
 		// Check for whitelisted public API paths
 		for _, whitelistedURL := range unauthorizedRoutes {
 			if isWhitelistMatch(url, whitelistedURL) {
